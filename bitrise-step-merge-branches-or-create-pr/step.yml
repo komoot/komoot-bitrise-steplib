@@ -53,6 +53,7 @@ deps:
   brew:
   - name: git
   - name: wget
+  - name: hub
   apt_get:
   - name: git
   - name: wget
@@ -64,24 +65,29 @@ toolkit:
 
 
 inputs:
-  - example_step_input: Default Value - you can leave this empty if you want to
+  - branch_to_merge_into:
     opts:
-      title: "Example Step Input"
-      summary: Summary. No more than 2-3 sentences.
+      title: "Branch to merge from"
+      summary: This is the branch you want to merge from
       description: |
-        Description of this input.
-
-        Can be Markdown formatted text.
+        a git branch name
+      is_expand: true
+      is_required: true
+      value_options: []
+  - branch_to_merge_from:
+    opts:
+      title: "Branch to merge into"
+      summary: This is the branch you want to merge into
+      description: |
+        a git branch name
       is_expand: true
       is_required: true
       value_options: []
 
 outputs:
-  - EXAMPLE_STEP_OUTPUT:
+  - CREATED_PULL_REQUEST:
     opts:
-      title: "Example Step Output"
-      summary: Summary. No more than 2-3 sentences.
+      title: "Created PR URL"
+      summary: URL of the created pull request if there was a conflict
       description: |
-        Description of this output.
-
-        Can be Markdown formatted text.
+        URL of the created pull request if there was a conflict

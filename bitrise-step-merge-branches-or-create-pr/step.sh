@@ -20,3 +20,47 @@ envman add --key EXAMPLE_STEP_OUTPUT --value 'the value you want to share'
 # The exit code of your Step is very important. If you return
 #  with a 0 exit code `bitrise` will register your Step as "successful".
 # Any non zero exit code will be registered as "failed" by `bitrise`.
+
+#! Checkout the branch to merge from
+git checkout $branch_to_merge_from
+
+#! Checkout the branch to merge into
+git checkout $branch_to_merge_into
+
+#! Trying to merge 
+git merge $branch_to_merge_from
+    
+if [ $? = 1 ]; then
+    #! If there are conflicts we create a Pull Request
+    echo 'conflicts!'
+
+    #! Abort merge
+    git merge --abort
+        
+    #! Checkout branch we wanted to merge from to create pull request from it
+    git checkout $branch_to_merge_from
+        
+    #! Create pull request
+    hub pull-request -b $branch_to_merge_into -m "merge $branch_to_merge_from in $branch_to_merge_into [${GIT_CLONE_COMMIT_MESSAGE_SUBJECT}]"
+
+    #! Get pull request URL
+    PULL_REQUEST=$(hub pr list --format='%U%n')
+    envman add --key CREATED_PULL_REQUEST --value "${PULL_REQUEST}"
+    echo "Pull request created at ${PULL_REQUEST}"
+
+    #! Checkout initial branch
+    git checkout $branch_to_merge_into
+
+    #! Return failure
+    exit 1
+        
+else
+    echo 'no conflicts'
+        
+    #! Push merged changes
+    git push
+
+    #! Return success
+    exit 0
+        
+fi
