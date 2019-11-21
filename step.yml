@@ -73,7 +73,6 @@ inputs:
         a git branch name
       is_expand: true
       is_required: true
-      value_options: []
   - branch_to_merge_from:
     opts:
       title: "Branch to merge into"
@@ -82,7 +81,6 @@ inputs:
         a git branch name
       is_expand: true
       is_required: true
-      value_options: []
 
 outputs:
   - CREATED_PULL_REQUEST:
