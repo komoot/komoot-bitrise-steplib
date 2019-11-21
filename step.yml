@@ -65,7 +65,7 @@ toolkit:
 
 
 inputs:
-  - branch_to_merge_into:
+  - branch_to_merge_into: master
     opts:
       title: "Branch to merge from"
       summary: This is the branch you want to merge from
@@ -73,7 +73,7 @@ inputs:
         a git branch name
       is_expand: true
       is_required: true
-  - branch_to_merge_from:
+  - branch_to_merge_from: develop
     opts:
       title: "Branch to merge into"
       summary: This is the branch you want to merge into
