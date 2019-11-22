@@ -21,18 +21,14 @@ envman add --key EXAMPLE_STEP_OUTPUT --value 'the value you want to share'
 #  with a 0 exit code `bitrise` will register your Step as "successful".
 # Any non zero exit code will be registered as "failed" by `bitrise`.
 
-git fetch 
-
 #! Checkout the branch to merge from
 git checkout $branch_to_merge_from
 
 #! Checkout the branch to merge into
 git checkout $branch_to_merge_into
 
-#! Trying to merge 
-git merge $branch_to_merge_from
-    
-if [ $? = 1 ]; then
+#! Trying to merge     
+if [ $(git merge $branch_to_merge_from) = 1 ]; then
     #! If there are conflicts we create a Pull Request
     echo 'conflicts!'
 
