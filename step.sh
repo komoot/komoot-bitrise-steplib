@@ -29,8 +29,10 @@ git checkout $branch_to_merge_from
 #! Checkout the branch to merge into
 git checkout $branch_to_merge_into
 
+MERGE_RESULT=$(git merge $branch_to_merge_from)
+
 #! Trying to merge     
-if [ $(git merge $branch_to_merge_from) = 1 ]; then
+if [ MERGE_RESULT = 1 ]; then
     #! If there are conflicts we create a Pull Request
     echo 'conflicts!'
 
