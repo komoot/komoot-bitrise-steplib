@@ -27,15 +27,13 @@ create_pr() {
 
     #! Abort merge
     git merge --abort
-        
+
     #! Checkout branch we wanted to merge from to create pull request from it
     git checkout $branch_to_merge_from
-        
-    #! Create pull request
-    hub pull-request -b $branch_to_merge_into -m "merge $branch_to_merge_from in $branch_to_merge_into [${GIT_CLONE_COMMIT_MESSAGE_SUBJECT}]"
 
-    #! Get pull request URL
-    PULL_REQUEST=$(hub pr list --format='%U%n')
+    #! Create pull request
+    PULL_REQUEST=$(hub pull-request -b $branch_to_merge_into -m "merge $branch_to_merge_from in $branch_to_merge_into [${GIT_CLONE_COMMIT_MESSAGE_SUBJECT}]")
+
     envman add --key CREATED_PULL_REQUEST --value "${PULL_REQUEST}"
     echo "Pull request created at ${PULL_REQUEST}"
 
@@ -57,11 +55,11 @@ git checkout $branch_to_merge_into
 git merge $branch_to_merge_from || create_pr
 
 echo 'no conflicts'
-        
+
 #! Push merged changes
 git push
 
 #! Return success
 exit 0
-        
+
 fi
