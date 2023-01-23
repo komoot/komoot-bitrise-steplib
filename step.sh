@@ -52,7 +52,7 @@ git checkout $branch_to_merge_from
 #! Checkout the branch to merge into
 git checkout $branch_to_merge_into
 
-git merge $branch_to_merge_from || create_pr
+git merge $branch_to_merge_from $additional_merge_options || create_pr
 
 echo 'no conflicts'
 
