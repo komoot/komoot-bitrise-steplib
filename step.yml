@@ -53,7 +53,7 @@ deps:
   brew:
   - name: git
   - name: wget
-  - name: hub
+  - name: gh
   apt_get:
   - name: git
   - name: wget
