@@ -1,8 +1,6 @@
 #!/bin/bash
 set -ex
 
-echo "This is the value specified for the input 'example_step_input': ${example_step_input}"
-
 #
 # --- Export Environment Variables for other Steps:
 # You can export Environment Variables for other Steps with
@@ -44,7 +42,7 @@ create_pr() {
     exit 1
 }
 
-git fetch
+git fetch -q
 
 #! Checkout the branch to merge from
 git checkout $branch_to_merge_from
