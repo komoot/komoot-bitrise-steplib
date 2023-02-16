@@ -53,7 +53,7 @@ deps:
   brew:
   - name: git
   - name: wget
-  - name: hub
+  - name: gh
   apt_get:
   - name: git
   - name: wget
@@ -81,7 +81,7 @@ inputs:
         a git branch name
       is_expand: true
       is_required: true
-
+    
 outputs:
   - CREATED_PULL_REQUEST:
     opts:
