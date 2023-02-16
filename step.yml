@@ -81,6 +81,14 @@ inputs:
         a git branch name
       is_expand: true
       is_required: true
+  - additional_merge_options: 
+    opts:
+      title: "Additional merge options"
+      summary: Extra --options to add to git merge
+      description: |
+        command line options allowed by git merge
+      is_expand: true
+      is_required: false
 
 outputs:
   - CREATED_PULL_REQUEST:
